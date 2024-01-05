@@ -33,9 +33,9 @@
 
 - `DELETE - /tasks/:id`
 
-  [] Deve ser possível remover uma task pelo `id`.
+  [x] Deve ser possível remover uma task pelo `id`.
 
-  [] Antes de realizar a remoção, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
+  [x] Antes de realizar a remoção, deve ser feito uma validação se o `id` pertence a uma task salva no banco de dados.
 
 - `PATCH - /tasks/:id/complete`
 

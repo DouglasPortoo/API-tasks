@@ -70,6 +70,7 @@ export async function taskRoutes(app: FastifyInstance) {
     if (taskExist === undefined) {
       throw new Error("Task nao existe no banco");
     }
+
     const updateData :updateDataSchema = {};
 
     if (title && title !== taskExist.title) {
@@ -92,4 +93,22 @@ export async function taskRoutes(app: FastifyInstance) {
 
     return { taskUpdated };
   });
+
+  app.delete('/:id', async (req,replay)=>{
+    const createTaskIdBodySchema = z.object({
+      id: z.string().uuid(),
+    });
+
+    const { id } = createTaskIdBodySchema.parse(req.params);
+
+    const [taskExist] = await knex("tasks").where({ id });
+
+    if (taskExist === undefined) {
+      throw new Error("Task nao existe no banco");
+    }
+
+    await knex("tasks").where({ id }).del();
+
+    return replay.status(204).send();
+  })
 }
